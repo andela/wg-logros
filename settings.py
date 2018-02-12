@@ -16,13 +16,16 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'database.sqlite'),
+        'NAME': './database.sqlite',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
         'PORT': '',
     }
 }
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config()}
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '$7aeog*h*5ff66zj%%gz*(!y=-=rgrdf8$k#=jnfo*+f@6#xt='
