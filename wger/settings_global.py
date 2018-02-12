@@ -313,7 +313,7 @@ THUMBNAIL_ALIASES = {
 #
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 # The default is not DEBUG, override if needed
 # COMPRESS_ENABLED = True
 COMPRESS_CSS_FILTERS = (
