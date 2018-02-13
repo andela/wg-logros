@@ -28,6 +28,7 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 
+
 #
 # Application definition
 #
@@ -91,7 +92,7 @@ INSTALLED_APPS = (
 # added list of external libraries to be installed by bower
 BOWER_INSTALLED_APPS = (
     'jquery#2.1.x',
-    'bootstrap#3.3',
+    'bootstrap#3',
     'd3',
     'shariff',
     'tinymce-dist',
