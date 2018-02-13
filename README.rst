@@ -72,6 +72,9 @@ Then install the python packages from pypi in the virtualenv::
  $ invoke bootstrap_wger \
           --settings-path /home/wger/wger/settings.py \
           --no-start-server
+ $ npm install bootstrap3
+ $ copy bootstrap3 from the node_modules and replace it with the bootstrap folder in wger/core/static/bower_components
+ $ Rename the folder from bootstrap3 to bootstrap
  $ python manage.py runserver
 
 3) Log in as: **admin**, password **admin**
