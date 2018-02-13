@@ -2,11 +2,8 @@
   "name": "wger",
   "description": "Self hosted FLOSS fitness/workout and weight tracker",
   "main": "",
-  "authors": [
-    "geofrocker <geofrocker2@gmail.com>"
-  ],
   "license": "AGPL-3.0",
-  "homepage": "https://github.com/andela/wg-gnext",
+  "homepage": "https://github.com/andela/wg-logros",
   "ignore": [
     "**/.*",
     "node_modules",
