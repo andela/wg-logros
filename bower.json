@@ -1,0 +1,15 @@
+{
+  "name": "wger",
+  "description": "Self hosted FLOSS fitness/workout and weight tracker",
+  "main": "",
+  "license": "AGPL-3.0",
+  "homepage": "https://github.com/andela/wg-logros",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "wger/core/static/bower_components",
+    "test",
+    "tests"
+  ]
+}
