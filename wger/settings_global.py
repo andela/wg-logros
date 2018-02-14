@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
@@ -111,6 +112,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 
     # Javascript Header. Sends helper headers for AJAX
     'wger.utils.middleware.JavascriptAJAXRedirectionMiddleware',
@@ -132,7 +134,8 @@ MIDDLEWARE_CLASSES = (
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'wger.utils.helpers.EmailAuthBackend'
+    'wger.utils.helpers.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
 )
 
 TEMPLATES = [
@@ -151,6 +154,8 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
 
                 # Django mobile
                 'django_mobile.context_processors.flavour',
@@ -314,6 +319,10 @@ THUMBNAIL_ALIASES = {
 #
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '197453420843149'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'a4fcf058e205ee880313053339ce3924'
+
 
 # The default is not DEBUG, override if needed
 # COMPRESS_ENABLED = True

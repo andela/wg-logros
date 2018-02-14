@@ -14,6 +14,8 @@
     {% trans 'Login' as submit_text %}
     {% render_form_fields form submit_text %}
 </form>
+<br>
+<a class="btn" style="background:#3B5998; color: white; margin-left: 195px;" href="{% url 'social:begin' 'facebook' %}?next={{ request.GET.next }}"><span class="fa fa-facebook"></span> Sign in with Facebook</a>
 {% endblock %}
 
 
