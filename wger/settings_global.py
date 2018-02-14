@@ -137,6 +137,9 @@ AUTHENTICATION_BACKENDS = (
     'wger.utils.helpers.EmailAuthBackend',
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
 )
 
 TEMPLATES = [
@@ -326,6 +329,9 @@ SOCIAL_AUTH_FACEBOOK_SECRET = 'a4fcf058e205ee880313053339ce3924'
 
 SOCIAL_AUTH_TWITTER_KEY = 'ljh2d8LqAR5UiSqQaxMzrWdyj'
 SOCIAL_AUTH_TWITTER_SECRET = 'WUoApa3arkk8rT5PmzKq3udliAfM6D6KZUSqNwCwCW7vGGqz4Y'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "623986392163-qv6tes1ul1c1og7fu0l"\
+                                "424omfntslgku.apps.googleusercontent.com"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'dcW3wprD5cMgzVB06VHzKi_d'
 
 
 # The default is not DEBUG, override if needed
