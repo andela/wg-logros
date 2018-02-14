@@ -7,8 +7,8 @@
 #### Any background context you want to provide?
 
 #### What are the relevant pivotal tracker stories?
+[pivotal tracker story ID](pivotal tracker link)
 
 #### Screenshots (if appropriate)
-[pivotal tracker story ID](pivotal tracker link)
 
 #### Questions:
