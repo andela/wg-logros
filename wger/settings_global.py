@@ -136,6 +136,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'wger.utils.helpers.EmailAuthBackend',
     'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
 )
 
 TEMPLATES = [
@@ -322,6 +323,9 @@ STATIC_URL = '/static/'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '197453420843149'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'a4fcf058e205ee880313053339ce3924'
+
+SOCIAL_AUTH_TWITTER_KEY = 'ljh2d8LqAR5UiSqQaxMzrWdyj'
+SOCIAL_AUTH_TWITTER_SECRET = 'WUoApa3arkk8rT5PmzKq3udliAfM6D6KZUSqNwCwCW7vGGqz4Y'
 
 
 # The default is not DEBUG, override if needed
