@@ -16,6 +16,7 @@
 </form>
 <br>
 <a class="btn" style="background:#3B5998; color: white; margin-left: 195px;" href="{% url 'social:begin' 'facebook' %}?next={{ request.GET.next }}"><span class="fa fa-facebook"></span> Sign in with Facebook</a>
+<a class="btn" style="background:#55ACEE; color: white;" href="{% url 'social:begin' 'twitter' %}?next={{ request.GET.next }}"><span class="fa fa-twitter"></span> Sign in with Twitter</a>
 {% endblock %}
 
 
