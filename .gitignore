@@ -41,12 +41,11 @@ nosetests.xml
 coverage.xml
 
 # Translations
-*.mo
+*.m
 *.pot
 
 # Django stuff:
 *.log
-settings*.py
 *.sqlite
 /CACHE
 
@@ -65,3 +64,4 @@ node_modules
 .DS_Store
 venv-django
 .vscode/
+.env
