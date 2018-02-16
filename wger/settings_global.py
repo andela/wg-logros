@@ -16,7 +16,6 @@
 
 import re
 import sys
-
 '''
 This file contains the global settings that don't usually need to be changed.
 For a full list of options, visit:
@@ -107,7 +106,6 @@ BOWER_INSTALLED_APPS = (
     'sortablejs#1.4.x',
 )
 
-
 MIDDLEWARE_CLASSES = (
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -124,7 +122,6 @@ MIDDLEWARE_CLASSES = (
 
     # Send an appropriate Header so search engines don't index pages
     'wger.utils.middleware.RobotsExclusionMiddleware',
-
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -143,6 +140,8 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOpenId',
     'social_core.backends.google.GoogleOAuth2',
 )
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
+                           'wger.utils.helpers.EmailAuthBackend')
 
 TEMPLATES = [
     {
@@ -172,11 +171,11 @@ TEMPLATES = [
             'loaders': [
                 # Django mobile
                 'django_mobile.loader.Loader',
-
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',
             ],
-            'debug': False
+            'debug':
+            False
         },
     },
 ]
@@ -194,20 +193,17 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-
 #
 # Email
 #
 EMAIL_SUBJECT_PREFIX = '[wger] '
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
 #
 # Login
 #
 LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/'
-
 
 #
 # Internationalization
@@ -227,29 +223,26 @@ TIME_ZONE = None
 
 # Restrict the available languages
 LANGUAGES = (
-            ('en', 'English'),
-            ('de', 'German'),
-            ('bg', 'Bulgarian'),
-            ('es', 'Spanish'),
-            ('ru', 'Russian'),
-            ('nl', 'Dutch'),
-            ('pt', 'Portuguese'),
-            ('el', 'Greek'),
-            ('cs', 'Czech'),
-            ('sv', 'Swedish'),
-            ('no', 'Norwegian'),
+    ('en', 'English'),
+    ('de', 'German'),
+    ('bg', 'Bulgarian'),
+    ('es', 'Spanish'),
+    ('ru', 'Russian'),
+    ('nl', 'Dutch'),
+    ('pt', 'Portuguese'),
+    ('el', 'Greek'),
+    ('cs', 'Czech'),
+    ('sv', 'Swedish'),
+    ('no', 'Norwegian'),
 )
 
 # Default language code for this installation.
 LANGUAGE_CODE = 'en'
 
 # All translation files are in one place
-LOCALE_PATHS = (
-    os.path.join(SITE_ROOT, 'locale'),
-)
+LOCALE_PATHS = (os.path.join(SITE_ROOT, 'locale'), )
 
 FLAVOURS_STORAGE_BACKEND = 'session'
-
 
 #
 # Logging
@@ -278,12 +271,10 @@ LOGGING = {
     }
 }
 
-
 #
 # ReCaptcha
 #
 RECAPTCHA_USE_SSL = True
-
 
 #
 # Cache
@@ -296,29 +287,50 @@ CACHES = {
     }
 }
 
-
 #
 # Easy thumbnails
 #
 THUMBNAIL_ALIASES = {
     '': {
-        'micro': {'size': (30, 30)},
-        'micro_cropped': {'size': (30, 30), 'crop': 'smart'},
-
-        'thumbnail': {'size': (80, 80)},
-        'thumbnail_cropped': {'size': (80, 80), 'crop': 'smart'},
-
-        'small': {'size': (200, 200)},
-        'small_cropped': {'size': (200, 200), 'crop': 'smart'},
-
-        'medium': {'size': (400, 400)},
-        'medium_cropped': {'size': (400, 400), 'crop': 'smart'},
-
-        'large': {'size': (800, 800), 'quality': 90},
-        'large_cropped': {'size': (800, 800), 'crop': 'smart', 'quality': 90},
+        'micro': {
+            'size': (30, 30)
+        },
+        'micro_cropped': {
+            'size': (30, 30),
+            'crop': 'smart'
+        },
+        'thumbnail': {
+            'size': (80, 80)
+        },
+        'thumbnail_cropped': {
+            'size': (80, 80),
+            'crop': 'smart'
+        },
+        'small': {
+            'size': (200, 200)
+        },
+        'small_cropped': {
+            'size': (200, 200),
+            'crop': 'smart'
+        },
+        'medium': {
+            'size': (400, 400)
+        },
+        'medium_cropped': {
+            'size': (400, 400),
+            'crop': 'smart'
+        },
+        'large': {
+            'size': (800, 800),
+            'quality': 90
+        },
+        'large_cropped': {
+            'size': (800, 800),
+            'crop': 'smart',
+            'quality': 90
+        },
     },
 }
-
 
 #
 # Django compressor
@@ -338,10 +350,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'dcW3wprD5cMgzVB06VHzKi_d'
 
 # The default is not DEBUG, override if needed
 # COMPRESS_ENABLED = True
-COMPRESS_CSS_FILTERS = (
-    'compressor.filters.css_default.CssAbsoluteFilter',
-    'compressor.filters.cssmin.rCSSMinFilter'
-)
+COMPRESS_CSS_FILTERS = ('compressor.filters.css_default.CssAbsoluteFilter',
+                        'compressor.filters.cssmin.rCSSMinFilter')
 COMPRESS_ROOT = STATIC_ROOT
 
 # BOWER binary
@@ -354,18 +364,22 @@ else:
 # Django Rest Framework
 #
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('wger.utils.permissions.WgerPermission',),
-    'PAGINATE_BY': 20,
-    'PAGINATE_BY_PARAM': 'limit',  # Allow client to override, using `?limit=xxx`.
-    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'DEFAULT_PERMISSION_CLASSES': ('wger.utils.permissions.WgerPermission', ),
+    'PAGINATE_BY':
+    20,
+    'PAGINATE_BY_PARAM':
+    'limit',  # Allow client to override, using `?limit=xxx`.
+    'TEST_REQUEST_DEFAULT_FORMAT':
+    'json',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ),
-    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',
-                                'rest_framework.filters.OrderingFilter',)
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.DjangoFilterBackend',
+        'rest_framework.filters.OrderingFilter',
+    )
 }
-
 
 #
 # CORS headers: allow all hosts to access the API
@@ -376,9 +390,7 @@ CORS_URLS_REGEX = r'^/api/.*$'
 #
 # Ignore these URLs if they cause 404
 #
-IGNORABLE_404_URLS = (
-    re.compile(r'^/favicon\.ico$'),
-)
+IGNORABLE_404_URLS = (re.compile(r'^/favicon\.ico$'), )
 
 #
 # Application specific configuration options
