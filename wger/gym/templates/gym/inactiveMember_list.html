@@ -16,10 +16,11 @@
 {% block content %}
 
 {% if perms.gym.manage_gym or perms.gym.gym_trainer %}
-<div><a class="btn btn-warning pull-right" href="{% url 'gym:gym:inactive-user-list' gym.pk %}">View inactive-gym-members</a></div>
-<h3>Active gym users</h3><br>
-    {% include 'gym/partial_user_list.html' %}
+<div><a class="btn btn-success pull-right" href="{% url 'gym:gym:user-list' gym.pk %}">View active-gym-members</a></div>
+<h3>Inactive gym members</h3><br>
+    {% include 'gym/partial_inactive_user_list.html' %}
 {% endif %}
+
 
 
 <h4>{% trans "Administrators and trainers" %}</h4>
