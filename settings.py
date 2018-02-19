@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from wger.settings_global import *
 
 # Use 'DEBUG = True' to get more details for server errors
@@ -59,7 +58,6 @@ WGER_SETTINGS['EMAIL_FROM'] = 'wger Workout Manager <wger@example.com>'
 
 # Your twitter handle, if you have one for this instance.
 #WGER_SETTINGS['TWITTER'] = ''
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Static files (CSS, JavaScript, Images)
@@ -71,4 +69,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'wger/core/static'),
 )
-
