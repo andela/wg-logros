@@ -24,7 +24,7 @@ $(document).ready( function () {
 </thead>
 <tbody>
 {% for current_user in user_table.users %}
-{% if current_user.obj.is_active %}
+{% if not current_user.obj.is_active %}
 <tr>
     <td>
         {{current_user.obj.pk}}
