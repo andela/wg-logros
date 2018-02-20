@@ -24,6 +24,7 @@ from easy_thumbnails.alias import aliases
 from easy_thumbnails.files import get_thumbnailer
 
 from django.utils.translation import ugettext as _
+from django.shortcuts import render, get_object_or_404
 
 from wger.config.models import LanguageConfig
 from wger.exercises.api.serializers import (
@@ -56,6 +57,44 @@ class ExerciseViewSet(viewsets.ModelViewSet):
         # Todo is it right to call set author after save?
         obj.set_author(self.request)
         obj.save()
+
+
+@api_view(['GET'])
+def exercise_info(request, id):
+    ''' Returns all information for an exercise '''
+
+    exercise_data = {}
+
+    exercise = get_object_or_404(Exercise, pk=id)
+
+    exercise_data['exercise'] = exercise
+    backgrounds_back = []
+    backgrounds_front = []
+
+    for muscle in exercise.muscles.all():
+        if muscle.is_front:
+            backgrounds_front.append('images/muscles/main/muscle-%s.svg' % muscle.id)
+        else:
+            backgrounds_back.append('images/muscles/main/muscle-%s.svg' % muscle.id)
+
+    for muscle in exercise.muscles_secondary.all():
+        if muscle.is_front:
+            backgrounds_front.append('images/muscles/secondary/muscle-%s.svg' % muscle.id)
+        else:
+            backgrounds_back.append('images/muscles/secondary/muscle-%s.svg' % muscle.id)
+
+    backgrounds_front.append('images/muscles/muscular_system_front.svg')
+    backgrounds_back.append('images/muscles/muscular_system_back.svg')
+
+    backgrounds = (backgrounds_front, backgrounds_back)
+    exercise_data['muscle_backgrounds_front'] = backgrounds[0]
+    exercise_data['muscle_backgrounds_back'] = backgrounds[1]
+
+    images = ['/media/' + str(image.image)
+              for image in exercise.exerciseimage_set.accepted()]
+    exercise_data['images'] = images
+
+    return render(request, 'exercise/view.html', exercise_data)
 
 
 @api_view(['GET'])
