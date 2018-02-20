@@ -118,7 +118,6 @@ $(document).ready(function() {
 
 
 {# Images #}
-{% with images=exercise.exerciseimage_set.accepted %}
 {% if images or perms.exercises.change_exerciseimage  %}
 <div class="row" style="margin-top:1em;">
     <div class="col-xs-3">
@@ -133,16 +132,15 @@ $(document).ready(function() {
     </div>
     <div class="col-xs-9">
         <div class="image-gallery">
-        {% with other_images=images %}
-        {% for image in other_images %}
+        {% for image in images %}
             <div class="image-box">
                 <div class="boxInner">
-                    <img src="{{ image.image|thumbnail_url:'small' }}"
+                    <img src="{{ image }}"
                          alt=""
                          class="gallery-image">
 
                     <div class="titleBox">
-                        <a href="{{ image.image.url }}"
+                        <a href="{{ image }}"
                            target="_blank"
                            class=" no-hover"
                            title="{% trans 'Download' %}">
@@ -169,12 +167,11 @@ $(document).ready(function() {
                 </div>
             </div>
         {% endfor %}
-        {% endwith %}
         </div>
     </div>
 </div>
 {% endif %}
-{% endwith %}
+
 
 {% if perms.exercises.change_exerciseimage %}
 {% with images=exercise.exerciseimage_set.pending %}

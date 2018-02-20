@@ -20,16 +20,39 @@ This file contains forms used in the application
 from captcha.fields import ReCaptchaField
 
 from django.utils.translation import ugettext as _
-from django.forms import (Form, MultipleHiddenInput, ModelForm, DateField,
-                          IntegerField, DecimalField, CharField, widgets,
-                          ModelChoiceField)
+from django.forms import (
+    Form,
+    MultipleHiddenInput,
+    ModelForm,
+    DateField,
+    IntegerField,
+    DecimalField,
+    CharField,
+    widgets,
+    ModelChoiceField
+)
 
-from wger.core.models import (RepetitionUnit, WeightUnit)
-from wger.exercises.models import (Exercise, ExerciseCategory)
-from wger.manager.models import (WorkoutSession, Workout, Day, Set, Setting,
-                                 WorkoutLog)
-from wger.utils.widgets import (TranslatedSelectMultiple, TranslatedSelect,
-                                ExerciseAjaxSelect)
+from wger.core.models import (
+    RepetitionUnit,
+    WeightUnit
+)
+from wger.exercises.models import (
+    Exercise,
+    ExerciseCategory
+)
+from wger.manager.models import (
+    WorkoutSession,
+    Workout,
+    Day,
+    Set,
+    Setting,
+    WorkoutLog
+)
+from wger.utils.widgets import (
+    TranslatedSelectMultiple,
+    TranslatedSelect,
+    ExerciseAjaxSelect
+)
 from wger.utils.constants import DATE_FORMATS
 from wger.utils.widgets import Html5DateInput
 
@@ -129,14 +152,20 @@ class WorkoutLogForm(ModelForm):
 
     These fields are re-defined here only to make them optional
     '''
-    repetition_unit = ModelChoiceField(
-        queryset=RepetitionUnit.objects.all(), label=_('Unit'), required=False)
-    weight_unit = ModelChoiceField(
-        queryset=WeightUnit.objects.all(), label=_('Unit'), required=False)
-    exercise = ModelChoiceField(
-        queryset=Exercise.objects.all(), label=_('Exercise'), required=False)
-    reps = IntegerField(label=_('Repetitions'), required=False)
-    weight = DecimalField(label=_('Weight'), initial=0, required=False)
+    repetition_unit = ModelChoiceField(queryset=RepetitionUnit.objects.all(),
+                                       label=_('Unit'),
+                                       required=False)
+    weight_unit = ModelChoiceField(queryset=WeightUnit.objects.all(),
+                                   label=_('Unit'),
+                                   required=False)
+    exercise = ModelChoiceField(queryset=Exercise.objects.all(),
+                                label=_('Exercise'),
+                                required=False)
+    reps = IntegerField(label=_('Repetitions'),
+                        required=False)
+    weight = DecimalField(label=_('Weight'),
+                          initial=0,
+                          required=False)
 
     class Meta:
         model = WorkoutLog
