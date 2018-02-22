@@ -1,0 +1,23 @@
+[
+    {
+        "pk": 8,
+        "fields": {
+            "name": "Logros"
+        },
+        "model": "core.author"
+    },
+    {
+        "pk": 9,
+        "fields": {
+            "name": "Infinitos"
+        },
+        "model": "core.author"
+    },
+    {
+        "pk": 10,
+        "fields": {
+            "name": "Logros Infinitos"
+        },
+        "model": "core.author"
+    }
+]
