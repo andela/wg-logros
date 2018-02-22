@@ -20,7 +20,7 @@ from django import forms
 from django.utils.translation import ugettext as _
 from wger.core.models import UserProfile
 
-from wger.nutrition.models import (IngredientWeightUnit, Ingredient, MealItem)
+from wger.nutrition.models import (IngredientWeightUnit, Ingredient, Meal, MealItem)
 from wger.utils.widgets import Html5NumberInput
 
 logger = logging.getLogger(__name__)
@@ -131,9 +131,17 @@ class MealItemForm(forms.ModelForm):
             ingredient_id = kwargs['instance'].ingredient_id
 
         if kwargs.get('data'):
-            ingredient_id = kwargs['data']['ingredient']
+            ingredient_id = kwargs.get('data').get('ingredient')
 
         # Filter the available ingredients
         if ingredient_id:
             self.fields['weight_unit'].queryset = \
                 IngredientWeightUnit.objects.filter(ingredient_id=ingredient_id)
+
+
+class MealForm(MealItemForm):
+    amount = forms.DecimalField(widget=Html5NumberInput)
+
+    class Meta:
+        model = Meal
+        fields = '__all__'
