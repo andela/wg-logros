@@ -46,6 +46,17 @@ function wgerCustomModalInit()
 
 <table class="table table-bordered">
     <thead>
+            {% if is_owner %}
+            <tr>
+                <td colspan="6">
+                <a href="{% url 'nutrition:meal:add' plan.id %}"
+                   class="wger-modal-dialog">
+                    <span class="{% fa_class 'plus' %}"></span>
+                    {% trans "Add a new meal" %}
+                </a>
+                </td>
+            <tr>
+            {% endif %}
         <tr style="background: #E0E0E0;">
             <th>{% trans "Meal" %}</th>
             <th>{% trans "Contents" %}</th>
@@ -141,20 +152,9 @@ function wgerCustomModalInit()
 </p>
 {% endif %}
 {% endfor %}
-        {% if is_owner %}
-        <tr>
-            <td colspan="6">
-            <a href="{% url 'nutrition:meal:add' plan.id %}"
-               class="wger-modal-dialog">
-                <span class="{% fa_class 'plus' %}"></span>
-                {% trans "Add a new meal" %}
-            </a>
-            </td>
-        <tr>
-        {% endif %}
     </tbody>
 </table>
-
+<br><hr>
 <h4>{% trans "Nutritional data" %}</h4>
 {% if weight_entry %}
     {% blocktrans with date=weight_entry.date weight=weight_entry.weight %}
