@@ -312,6 +312,7 @@ def load_fixtures(context, settings_path=None):
     call_command("loaddata", path + "muscles.json")
     call_command("loaddata", path + "categories.json")
     call_command("loaddata", path + "exercises.json")
+    call_command("loaddata", path + "authors.json")
 
     # Nutrition
     path = os.path.join(current_dir, 'wger', 'nutrition', 'fixtures/')
