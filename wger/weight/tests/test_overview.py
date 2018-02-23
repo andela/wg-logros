@@ -41,6 +41,14 @@ class WeightOverviewTestCase(WorkoutManagerTestCase):
         self.user_login('test')
         self.weight_overview()
 
+    def test_user_weight_overview(self):
+        '''
+        Helper function to test the user weight overview page
+        '''
+        response = self.client.get(reverse('weight:user-weight-data',
+                                           kwargs={'username': self.current_user}))
+        self.assertEqual(response.status_code, 200)
+
 
 class WeightExportCsvTestCase(WorkoutManagerTestCase):
     '''
