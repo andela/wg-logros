@@ -12,7 +12,7 @@ msgstr ""
 "POT-Creation-Date: 2016-02-14 10:32+0100\n"
 "PO-Revision-Date: 2016-02-14 09:34+0000\n"
 "Last-Translator: rge <roland@geider.net>\n"
-"Language-Team: Greek (http://www.transifex.com/rge/wger-workout-manager/language/el/)\n"
+"Language-Team: Greek (https://translate.zanata.org/iteration/view/wger-logros/v1/documents?dswid=5300)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1243,8 +1243,8 @@ msgid "Github"
 msgstr "Github"
 
 #: core/templates/navigation.html:134 software/templates/contribute.html:82
-msgid "Translate with Transifex"
-msgstr "Μεταφράστε με το Transifex"
+msgid "Translate with zanata"
+msgstr "Μεταφράστε με το zanata"
 
 #: core/templates/navigation.html:149 core/templates/template.html:201
 #: core/templates/template_features.html:91
@@ -3789,9 +3789,9 @@ msgid ""
 "Do you want to use wger in your own language?\n"
 "Do you think the current translation could be improved?\n"
 "The translations are easily managed and edited online, if you are interested,\n"
-"go to the transifex site, request access and we will set everything\n"
+"go to the zanata site, request access and we will set everything\n"
 "up. "
-msgstr "Θέλετε να χρησιμοποιήσετε το wger στην γλώσσα σας;\nΝομίζετε ότι η τρέχουσα μετάφραση μπορεί να βελτιωθεί;\nΟι μεταφράσεις μπορούν να διαχειριστούν εύκολα και να επεξεργαστούν online. Αν ενδιαφέρεστε, επισκεφτείτε την σελίδα της transifex, αιτηθείτε πρόσβαση και τα υπόλοιπα θα τα ετοιμάσουμε εμείς."
+msgstr "Θέλετε να χρησιμοποιήσετε το wger στην γλώσσα σας;\nΝομίζετε ότι η τρέχουσα μετάφραση μπορεί να βελτιωθεί;\nΟι μεταφράσεις μπορούν να διαχειριστούν εύκολα και να επεξεργαστούν online. Αν ενδιαφέρεστε, επισκεφτείτε την σελίδα της zanata, αιτηθείτε πρόσβαση και τα υπόλοιπα θα τα ετοιμάσουμε εμείς."
 
 #: software/templates/contribute.html:88
 msgid "Code"

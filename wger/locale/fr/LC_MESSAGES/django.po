@@ -9,7 +9,7 @@
 # Jordane Pelloux-Prayer <jordane.pelloux@gmail.com>, 2015
 # Mickael Fortunato <morsi.morsicus@gmail.com>, 2016
 # Nicolas Roby <niroby@laposte.net>, 2015
-# Olivier <olivier+transifex@migeot.org>, 2013
+# Olivier <olivier+zanata@migeot.org>, 2013
 # rge <roland@geider.net>, 2016
 msgid ""
 msgstr ""
@@ -18,7 +18,7 @@ msgstr ""
 "POT-Creation-Date: 2016-02-14 10:32+0100\n"
 "PO-Revision-Date: 2016-02-14 09:34+0000\n"
 "Last-Translator: rge <roland@geider.net>\n"
-"Language-Team: French (http://www.transifex.com/rge/wger-workout-manager/language/fr/)\n"
+"Language-Team: French (https://translate.zanata.org/iteration/view/wger-logros/v1/documents?dswid=5300)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1249,8 +1249,8 @@ msgid "Github"
 msgstr "Github"
 
 #: core/templates/navigation.html:134 software/templates/contribute.html:82
-msgid "Translate with Transifex"
-msgstr "Traduire avec Transifex"
+msgid "Translate with Zanata"
+msgstr "Traduire avec Zanata"
 
 #: core/templates/navigation.html:149 core/templates/template.html:201
 #: core/templates/template_features.html:91
@@ -3795,7 +3795,7 @@ msgid ""
 "Do you want to use wger in your own language?\n"
 "Do you think the current translation could be improved?\n"
 "The translations are easily managed and edited online, if you are interested,\n"
-"go to the transifex site, request access and we will set everything\n"
+"go to the Zanata site, request access and we will set everything\n"
 "up. "
 msgstr ""
 
