@@ -45,7 +45,7 @@ $(document).ready(function () {
     right: 10,
     show_secondary_x_label: true,
     xax_count: 10,
-    target: '#weight_diagram',
+    target: '#user_diagram',
     x_accessor: 'date',
     y_accessor: 'weight',
     min_y_from_data: true,
@@ -53,7 +53,7 @@ $(document).ready(function () {
   };
 
   username = $('#current-username').data('currentUsername');
-  url = '/weight/api/get_weight_data/' + username;
+  url = '/weight/api/get_logged_user_weight_data/' + username;
 
   d3.json(url, function (json) {
     var data;

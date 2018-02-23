@@ -141,6 +141,9 @@ urlpatterns = [
     # The dashboard
     url(r'^dashboard$', misc.dashboard, name='dashboard'),
 
+    # The comparisons page
+    url(r'^comparison$', misc.comparison, name='comparison'),
+
     # Others
     url(r'^about$',
         TemplateView.as_view(template_name="misc/about.html"),
