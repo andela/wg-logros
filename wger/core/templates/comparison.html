@@ -20,9 +20,13 @@
     <div class="col-md-6">
         <select id="user-change" onchange="userchange(this.value)">
             <option value="none">--------</option>
+            {% if others %}
             {% for user in others %}
             <option value="{{user}}">{{ user }} </option>
             {% endfor %}
+            {%else%}
+            NO user to compare with
+            {% endif%}
         </select>
         <p id="nope">There is no chart here because there are no weight entries.</p>
         <div id="others_diagram"></div>
