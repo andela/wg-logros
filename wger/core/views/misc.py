@@ -99,6 +99,17 @@ def comparison(request, username=None):
     is_owner, user = check_access(request.user, username)
     others = User.objects.exclude(username=user.username)
 
+    users_with_same_gym = []
+
+    for _user in others:
+
+        try:
+
+            if _user.userprofile.gym.id == request.user.userprofile.gym.id:
+                users_with_same_gym.append(_user)
+        except Exception:
+            pass
+
     template_data = {}
 
     min_date = WeightEntry.objects.filter(user=user).\
@@ -119,7 +130,7 @@ def comparison(request, username=None):
     last_weight_entries = helpers.get_last_entries(user)
 
     template_data['users'] = users
-    template_data['others'] = others
+    template_data['others'] = users_with_same_gym
     template_data['is_owner'] = is_owner
     template_data['owner_user'] = user
     template_data['show_shariff'] = is_owner
