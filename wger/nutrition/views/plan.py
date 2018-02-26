@@ -69,7 +69,7 @@ def add(request):
     plan.save()
 
     return HttpResponseRedirect(
-        reverse('nutrition:plan:view', kwargs={'id': plan.id}))
+        reverse('nutrition:plan:overview'))
 
 
 class PlanDeleteView(WgerDeleteMixin, DeleteView):
