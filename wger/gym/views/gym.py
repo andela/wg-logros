@@ -358,7 +358,7 @@ def gym_permissions_user_edit(request, user_pk):
 
     if request.method == 'POST':
         form = GymUserPermisssionForm(
-            request.POST, available_roles=form_group_permission)
+            form_group_permission, request.POST)
 
         if form.is_valid():
 
