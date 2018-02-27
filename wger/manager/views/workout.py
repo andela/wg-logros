@@ -17,19 +17,24 @@
 import logging
 import uuid
 import datetime
+import csv
+from io import TextIOWrapper
+from json import loads, dumps
 
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpResponse
 from django.template.context_processors import csrf
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.translation import ugettext_lazy, ugettext as _
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DeleteView, UpdateView
+from django.utils.encoding import smart_str
 
-from wger.core.models import (RepetitionUnit, WeightUnit)
+from wger.core.models import (RepetitionUnit, WeightUnit, DaysOfWeek)
+from wger.exercises.models import Exercise
 from wger.manager.models import (Workout, WorkoutSession, WorkoutLog, Schedule,
-                                 Day)
+                                 Day, Set)
 from wger.manager.forms import (WorkoutForm, WorkoutSessionHiddenFieldsForm,
                                 WorkoutCopyForm)
 from wger.utils.generic_views import (WgerFormMixin, WgerDeleteMixin)
@@ -206,6 +211,75 @@ def add(request):
     workout.save()
 
     return HttpResponseRedirect(workout.get_absolute_url())
+
+
+@login_required
+def export_workout(request):
+    workouts = Workout.objects.filter(user=request.user)
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=mymodel.csv'
+
+    writer = csv.writer(response)
+    writer.writerow(['Creation Date',
+                     'Comment',
+                     'Days',
+                     'Description',
+                     'Exercise'])
+
+    for workout in workouts:
+        days = Day.objects.filter(training=workout.id)
+        for day in days:
+            workout_days = "/".join(
+                [record.day_of_week for record in day.day.all()]
+            )
+            sets = Set.objects.filter(exerciseday=day.id)
+            for each_set in sets:
+                exercises = "/".join(
+                    [exercise.name for exercise in each_set.exercises.all()]
+                )
+
+                writer.writerow([
+                    workout.creation_date,
+                    workout.comment, workout_days,
+                    day.description, exercises
+                ])
+
+    return response
+
+
+@login_required
+def import_workout(request):
+
+    if request.POST and request.FILES:
+        csvfile = TextIOWrapper(
+            request.FILES['csv_file'].file,
+            encoding="utf-8"
+        )
+        reader = csv.DictReader(csvfile)
+        workouts = []
+        for row in reader:
+            workouts.append(dict(row))
+
+        for each_workout in workouts:
+            workout = Workout(
+                creation_date=each_workout["Creation Date"],
+                comment=each_workout["Comment"],
+                user=request.user)
+
+            workout.save()
+            day = Day(training=workout, description=each_workout["Description"])
+            day.save()
+            for day_name in each_workout["Days"].split("/"):
+                day.day.add(
+                    DaysOfWeek.objects.filter(day_of_week=day_name).first()
+                )
+            one_set = Set(exerciseday=day)
+            one_set.save()
+            for exercise in each_workout["Exercise"].split("/"):
+                one_set.exercises.add(
+                    Exercise.objects.filter(name=exercise).first()
+                )
+    return HttpResponseRedirect(reverse('manager:workout:overview'))
 
 
 class WorkoutDeleteView(WgerDeleteMixin, LoginRequiredMixin, DeleteView):

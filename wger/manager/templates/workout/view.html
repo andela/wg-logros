@@ -237,8 +237,13 @@ an appointment for each training day with the appropriate exercises.{% endblockt
                <span class="{% fa_class 'pencil-square-o' %}"></span>
                {% trans "Edit workout" %}
             </a>
+            <a href="{% url 'manager:workout:export_workout'%}">
+                <span class="{% fa_class 'share' %}"></span>
+                {% trans "Export workout to CSV file" %}
+            </a>
         </li>
         {% endif %}
+
         <li>
             <a data-toggle="modal" data-target="#export-ical-popup">
                <span class="{% fa_class 'calendar' %}"></span>
