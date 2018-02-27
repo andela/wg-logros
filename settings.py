@@ -1,16 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 from wger.settings_global import *
 
 # Use 'DEBUG = True' to get more details for server errors
 DEBUG = True
 TEMPLATES[0]['OPTIONS']['debug'] = True
 
-ADMINS = (
-    ('Your name', 'your_email@example.com'),
-)
+ADMINS = (('Your name', 'your_email@example.com'), )
 MANAGERS = ADMINS
-
 
 DATABASES = {
     'default': {
@@ -22,11 +20,15 @@ DATABASES = {
         'PORT': '',
     }
 }
-if 'DATABASE_URL' in os.environ:
+
+if os.getenv('DATABASE_URL'):
     import dj_database_url
     DATABASES = {'default': dj_database_url.config()}
+
+SESSION_ENGINE= 'django.contrib.sessions.backends.cached_db'
+
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '$7aeog*h*5ff66zj%%gz*(!y=-=rgrdf8$k#=jnfo*+f@6#xt='
+SECRET_KEY = 'l5(yrvp-8og9zcq2#6$xktzx_!)r0-(ao1#vwk1v#k-05033%y'
 
 # Your reCaptcha keys
 RECAPTCHA_PUBLIC_KEY = ''
@@ -58,14 +60,3 @@ WGER_SETTINGS['EMAIL_FROM'] = 'wger Workout Manager <wger@example.com>'
 
 # Your twitter handle, if you have one for this instance.
 #WGER_SETTINGS['TWITTER'] = ''
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'wger/core/static'),
-)
