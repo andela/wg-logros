@@ -124,6 +124,20 @@ class AddWorkoutTestCase(WorkoutManagerTestCase):
         self.user_logout()
 
 
+class WorkoutImportExportTestCase(WorkoutManagerTestCase):
+    '''
+    Tests importing and exporting workouts
+    '''
+
+    def export_csv(self):
+        '''
+        Test the CSV export
+        '''
+        response = self.client.get(reverse('manager:workout:export_workout'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'text/csv')
+
+
 class DeleteTestWorkoutTestCase(WorkoutManagerDeleteTestCase):
     '''
     Tests deleting a Workout
