@@ -41,6 +41,8 @@ from wger.core.api import views as core_api_views
 from wger.exercises.api import views as exercises_api_views
 from wger.nutrition.api import views as nutrition_api_views
 from wger.weight.api import views as weight_api_views
+from wger.weight.views import fitbitLogin, fitbit_data
+from wger.exercises.views.exercises import fitbit_activities, fitbit_Login
 
 #
 # REST API
@@ -196,7 +198,11 @@ urlpatterns = i18n_patterns(
     url(r'^sitemap\.xml$',
         sitemap,
         {'sitemaps': sitemaps},
-        name='sitemap')
+        name='sitemap'),
+    url(r'^fitbit/login', fitbitLogin, name="fitbit-login"),
+    url(r'fitbit/fetch', fitbit_data, name='fitbit'),
+    url(r'^fitbitact/login', fitbit_Login, name='fitbitlogin'),
+    url(r'^fitbit/activities', fitbit_activities, name='fitbit-excercise'),
 )
 
 url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='sitemap')

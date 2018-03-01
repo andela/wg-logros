@@ -17,8 +17,10 @@
 import logging
 import csv
 import datetime
+import dateutil
+import os
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -43,6 +45,7 @@ from wger.weight import helpers
 from wger.utils.month_range import get_month_range
 from wger.utils.helpers import check_access
 from wger.utils.generic_views import WgerFormMixin
+from wger.core.views.fitbit import FitBit
 
 logger = logging.getLogger(__name__)
 
@@ -212,6 +215,40 @@ def get_logged_user_weight_data(request, username=None):
 
     # Return the results to the client
     return Response(chart_data)
+
+
+@login_required
+def fitbitLogin(request):
+    fitbit = FitBit()
+    login_url = fitbit.ComposeAuthorizationURI('weight', os.environ.get('REDIRECT_URI') + "fetch")
+    return redirect(login_url)
+
+
+@login_required
+def fitbit_data(request):
+    """
+    View fetches weight data from fitbit
+    """
+    code = request.GET.get('code')
+    fitbit = FitBit()
+    # exchange access_code for token
+    token = fitbit.RequestAccessToken(code, os.environ.get('REDIRECT_URI') + "fetch")
+    # fetch weight data
+    try:
+        data = fitbit.fitbit_sync(token)
+        if data:
+            for log in data['body-weight']:
+                weight_entry = WeightEntry()
+                weight_entry.user = request.user
+                weight_entry.weight = log['value']
+                weight_entry.date = dateutil.parser.parse(log['dateTime'])
+                try:
+                    weight_entry.save()
+                except Exception as e:
+                    pass
+    except Exception as e:
+        return e
+    return HttpResponseRedirect(reverse('core:dashboard'))
 
 
 @api_view(['GET'])
