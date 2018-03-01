@@ -828,6 +828,11 @@ class WorkoutSession(models.Model):
     The date the workout session was performed
     '''
 
+    '''
+    The workout log the session belongs to
+    '''
+    workout_log = models.ForeignKey(WorkoutLog, verbose_name=_('WorkoutLog'), null=True, blank=True)
+
     notes = models.TextField(
         verbose_name=_('Notes'),
         null=True,
