@@ -63,3 +63,4 @@ webencodings==0.5.1
 whitenoise==3.3.1
 django-extensions
 psycopg2-binary
+fitbit==0.3.0

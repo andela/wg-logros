@@ -14,18 +14,19 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 import six
+import os
 import logging
 import uuid
 from django.core import mail
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.forms import (ModelForm, ModelChoiceField,
                           ModelMultipleChoiceField)
 from django.core.cache import cache
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
@@ -42,7 +43,8 @@ from wger.utils.widgets import (TranslatedSelect, TranslatedSelectMultiple,
                                 TranslatedOriginalSelectMultiple)
 from wger.config.models import LanguageConfig
 from wger.weight.helpers import process_log_entries
-
+from wger.core.views.fitbit import FitBit
+from wger.core.models import Language
 logger = logging.getLogger(__name__)
 
 
@@ -144,6 +146,59 @@ def view(request, id, slug=None):
     template_data['svg_uuid'] = str(uuid.uuid4())
 
     return render(request, 'exercise/view.html', template_data)
+
+
+@login_required
+def fitbit_Login(request):
+    fitbit = FitBit()
+    login_url = fitbit.ComposeAuthorizationURI('activity',
+                                               os.environ.get('REDIRECT_URI') + "activities")
+    return redirect(login_url)
+
+
+@login_required
+def fitbit_activities(request):
+    """
+    View gets activity data from fitbit
+    """
+    code = request.GET.get('code')
+    fitbit = FitBit()
+    # exchange access_code for token
+    token = fitbit.RequestAccessToken(code, os.environ.get('REDIRECT_URI') + "activities")
+    # get activity data
+
+    try:
+        data = fitbit.fitbit_act(token)
+        if data:
+            if not ExerciseCategory.objects.filter(name='Fitbit').exists():
+                exercise_category = ExerciseCategory()
+                exercise_category.name = 'Fitbit'
+                exercise_category.save()
+            try:
+                category_id = ExerciseCategory.objects.filter(name='Fitbit').first().id
+                for log in data['activities']:
+                    activity_entry = Exercise()
+                    activity_entry.user = request.user
+                    activity_entry.name_original = log['name']
+                    activity_entry.name = log['name']
+                    activity_entry.description = log['description']
+                    activity_entry.category = ExerciseCategory.objects.get(name='Fitbit')
+                    activity_entry.language = Language.objects.get(short_name='en')
+                    activity_entry.status = 2
+
+                    if Exercise.objects.filter(category_id=category_id,
+                                               name=activity_entry.name).first():
+                        continue
+                    else:
+                        activity_entry.save()
+
+            except Exception as e:
+                if "UNIQUE constraint failed" in str(e):
+                    messages.info(request, _('Already synced'))
+
+    except Exception as e:
+        return e
+    return HttpResponseRedirect(reverse('exercise:exercise:overview'))
 
 
 class ExercisesEditAddView(WgerFormMixin):

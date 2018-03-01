@@ -210,6 +210,26 @@
                                         </a>
                                     </li>
 
+                                    <li >
+                                        <a href="{% url 'fitbit-login' %}">
+                                            {% if not user.is_authenticated %}
+                                                {% trans "Features" %}
+                                            {% else %}
+                                                {% trans "Fitbit Weight" %}
+                                            {% endif %}
+                                        </a>
+                                    </li>
+
+                                    <li >
+                                        <a href="{% url 'fitbitlogin' %}">
+                                            {% if not user.is_authenticated %}
+                                                {% trans "Features" %}
+                                            {% else %}
+                                                {% trans "Fitbit Exercise" %}
+                                            {% endif %}
+                                        </a>
+                                    </li>
+
                                     {% if not trainer_identity %}
                                     <li class="divider"></li>
                                     <li>
