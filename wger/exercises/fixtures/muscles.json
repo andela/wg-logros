@@ -40,6 +40,14 @@
         }
     }, 
     {
+        "pk": 20, 
+        "model": "exercises.muscle", 
+        "fields": {
+            "is_front": true, 
+            "name": "Forearms"
+        }
+    },
+    {
         "pk": 7, 
         "model": "exercises.muscle", 
         "fields": {
@@ -54,7 +62,15 @@
             "is_front": false, 
             "name": "Gluteus maximus"
         }
-    }, 
+    },
+    {
+        "pk": 17, 
+        "model": "exercises.muscle", 
+        "fields": {
+            "is_front": false, 
+            "name": "lateral deltoid"
+        }
+    },
     {
         "pk": 12, 
         "model": "exercises.muscle", 
@@ -71,6 +87,14 @@
             "name": "Obliquus externus abdominis"
         }
     }, 
+    {
+        "pk": 19, 
+        "model": "exercises.muscle", 
+        "fields": {
+            "is_front": false, 
+            "name": "Posterious Deltoid "
+        }
+    },
     {
         "pk": 4, 
         "model": "exercises.muscle", 
