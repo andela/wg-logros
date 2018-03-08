@@ -80,6 +80,18 @@
             {% endif %}
         </td>
     </tr>
+
+    <tr>
+             <th>{% trans "Uses Periodization" %}</th>
+             <td>
+                 {% if schedule.use_periodization %}
+                    <span class="{% fa_class 'check' %}"></span>
+                  <small>{% trans "This schedule uses periodization training cycle" %}</small>
+              {% else %}
+                    <span class="{% fa_class 'times' %}"></span>
+                  {% endif %}
+            </td>
+          </tr>
     <tr>
         <th>{% trans "Is a loop" %}</th>
         <td>
@@ -161,7 +173,7 @@
 
                 <a href="{% url 'manager:step:add' schedule.id %}" class="wger-modal-dialog btn btn-default btn-sm">
                     <span class="{% fa_class 'plus' %}"></span>
-                    {% trans "Add workout" %}
+                    {% trans "Add workout schedules" %}
                 </a>
             </td>
             <td colspan="2">
@@ -179,15 +191,21 @@
     <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-heading">
+                    {% if active_workout == step %}
+                                     <span class="label label-info active-step">{% trans "active" %}</span>
+                                      <br/><br/>
+                                  {% endif  %}
                 <h4 class="panel-title">
-                    {% blocktrans count weeks=step.duration %}{{ weeks }} Week
-                    {% plural %}{{ weeks }} Weeks
+                    {% if step.is_periodized %}
+                  <label class="label label-success">{{ step.duration|periodize }}</label>
+             {% else %}
+                 <label class="label label-default">
+                 {% blocktrans count weeks=step.duration %}
+                     {{ weeks }} Week {% plural %}{{ weeks }} Weeks
                     {% endblocktrans %}
+                    </label>
+                    {% endif %}
                 </h4>
-
-                {% if active_workout == step %}
-                    <span class="label label-info">{% trans "active" %}</span>
-                {% endif  %}
             </div>
             <div class="panel-body">
                 <span>{{step_dates.0}} <br> {{step_dates.1}}</span>
