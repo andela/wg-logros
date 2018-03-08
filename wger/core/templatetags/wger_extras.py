@@ -16,6 +16,8 @@
 
 from django import template
 from django.conf import settings
+
+from wger.manager.helpers import periodization
 from django.forms.widgets import (CheckboxInput, ClearableFileInput)
 from django.utils.safestring import mark_safe
 from django.utils.translation import (ugettext_lazy as _, pgettext)
@@ -327,3 +329,11 @@ def render_form_fields(form, submit_text='Save', show_save=True):
     '''
 
     return {'form': form, 'show_save': show_save, 'submit_text': submit_text}
+
+
+@register.filter(name='periodize')
+def periodize(duration):
+    '''
+    Takes duration value and returns appropriate periodization cycle.
+    '''
+    return periodization.translate(duration)
