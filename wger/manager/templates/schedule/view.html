@@ -187,14 +187,13 @@
 
 {% for step in schedule.schedulestep_set.select_related %}
 {% with step_dates=step.get_dates %}
-<div class="row">
+<div>
     <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-heading">
                     {% if active_workout == step %}
-                                     <span class="label label-info active-step">{% trans "active" %}</span>
-                                      <br/><br/>
-                                  {% endif  %}
+                        <span class="label label-info active-step pull-right">{% trans "active" %}</span>
+                    {% endif  %}
                 <h4 class="panel-title">
                     {% if step.is_periodized %}
                   <label class="label label-success">{{ step.duration|periodize }}</label>
@@ -214,19 +213,14 @@
                 <a href="{{ step.workout.get_absolute_url }}"
                    class="btn btn-default btn-block btn-sm"
                    style="white-space: normal;">
+                   View
                     <span class="glyphicon glyphicon-chevron-right pull-right"></span>
                     {{ step.workout }}
                 </a>
             </div>
         </div>
     </div>
-    <div class="col-md-9">
-        {% for day in step.workout.canonical_representation.day_list %}
-        <div id="div-day-{{ day.obj.id }}">
-            {% render_day day.obj False %}
-        </div>
-        {% endfor %}
-    </div>
+    
 </div>
 {% endwith %}
 {% endfor %}
