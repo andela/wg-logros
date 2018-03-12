@@ -7783,6 +7783,50 @@
         "model": "exercises.exercise"
     },
     {
+        "pk": 396,
+        "fields": {
+            "license_author": "wger.de",
+            "status": "2",
+            "language": 2,
+            "muscles_secondary": [],
+            "description": "<p>Stand with your feet hip-distance apart, feet flat on the floor below the bar. Squat down and grasp the bar just outside your shins with an overhand or mixed grip (one overhand, one underhand). </p>\n<p>\u00a0</p>",
+            "equipment": [
+                10
+            ],
+            "creation_date": "2018-03-07",
+            "category": 12,
+            "uuid": "76964898-192c-4e93-b24c-914ea542002b",
+            "muscles": [
+                16
+            ],
+            "license": 2,
+            "name": "Deadlift"
+        },
+        "model": "exercises.exercise"
+    },
+    {
+        "pk": 397,
+        "fields": {
+            "license_author": "wger.de",
+            "status": "2",
+            "language": 2,
+            "muscles_secondary": [],
+            "description": "<p>Lie on an exercise mat on your stomach. Bring your legs together and extend your arms out past your head. Lift your torso and legs off the floor as high as you can. Pause at the top, then return to the starting position. </p>\n<p>\u00a0</p>",
+            "equipment": [
+                4
+            ],
+            "creation_date": "2018-03-07",
+            "category": 12,
+            "uuid": "76964898-192c-4e93-b24c-914ea542002b",
+            "muscles": [
+                16
+            ],
+            "license": 2,
+            "name": "Superman Exercise"
+        },
+        "model": "exercises.exercise"
+    },
+    {
         "pk": 6,
         "fields": {
             "exercise": 33,
