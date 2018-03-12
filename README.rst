@@ -155,6 +155,36 @@ The available options for the ``wger`` command (if installed from PyPI) or
   migrate_db              Run all database migrations
   start_wger              Start the application using django's built in webserver
 
+API
+===
+To use the API provided by the application, navigate to the ``About this Software`` part of the application then to ``REST API``.
+The API provides endpoints that cab be used to access the different functonalities of the app. This is important as it can be
+consumed to by third party applications/parties if they need to.
+
+User endpoint
+-------------
+The use endpoint is important since external apps might need to register accounts on behalf of their
+users without having to send them over to the wger instance.
+
+To access the user endpoint go to:
+::
+
+http://your_url/api/v2/users/
+
+Only the admin has rights to create users via the api and only the admin can authorize users who want to create users via the api.
+To authorize a user to create a user via the API:
+
+::
+
+$ ./manage.py add-user-rest-api --username <user-to-authorize> --password <admin-password>
+
+To view users created by a specific user throught the API:
+
+::
+
+$ ./manage.py list-user-rest-api <username_of_creator>
+
+
 Contact
 =======
 

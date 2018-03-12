@@ -107,6 +107,7 @@ router.register(
 # Core app
 router.register(
     r'userprofile', core_api_views.UserProfileViewSet, base_name='userprofile')
+router.register(r'users', core_api_views.UserRegisterViewSet, base_name='users')
 router.register(
     r'language', core_api_views.LanguageViewSet, base_name='language')
 router.register(
