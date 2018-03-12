@@ -160,7 +160,7 @@ circle.color-17becf:hover
  **************************************************************/
 .muscle-list, .exercise-overview{
     list-style-type: none;
-    margin-left: 0px;
+    padding: 0px;
 }
 
 .muscle-list .muscle, .exercise-overview .exercise{
