@@ -31,7 +31,7 @@ from wger.core.models import Language
 from wger.nutrition.models import Ingredient
 from wger.utils.generic_views import (WgerFormMixin, WgerDeleteMixin)
 from wger.utils.constants import PAGINATION_OBJECTS_PER_PAGE
-from wger.utils.language import load_language, load_ingredient_languages
+from wger.utils.language import load_language
 from wger.utils.cache import cache_mapper
 
 logger = logging.getLogger(__name__)

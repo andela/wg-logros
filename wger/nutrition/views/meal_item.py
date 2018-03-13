@@ -81,6 +81,7 @@ class MealItemCreateView(WgerFormMixin, CreateView):
             'nutrition:meal_item:add', kwargs={'meal_id': self.meal.id})
         context['ingredient_searchfield'] = self.request.POST.get(
             'ingredient_searchfield', '')
+        context['is_create'] = True
         return context
 
     def form_valid(self, form):
@@ -103,6 +104,17 @@ class MealItemEditView(WgerFormMixin, UpdateView):
     form_action_urlname = 'nutrition:meal_item:edit'
     template_name = 'meal_item/edit.html'
 
+    def get_meal(self):  # new
+        meal_item_id = self.kwargs['pk']
+        meal = MealItem.objects.get(pk=meal_item_id).meal
+        return meal
+
+    def get_initial(self):  # updated
+        initial = {
+            'time': self.get_meal().time}
+
+        return initial
+
     def get_success_url(self):
         return reverse(
             'nutrition:plan:view', kwargs={'id': self.object.meal.plan.id})
@@ -114,3 +126,18 @@ class MealItemEditView(WgerFormMixin, UpdateView):
         context = super(MealItemEditView, self).get_context_data(**kwargs)
         context['ingredient_searchfield'] = self.object.ingredient.name
         return context
+
+    def form_valid(self, form):  # updated
+        time = form.instance.time
+        meal = self.get_meal()
+        meal.time = time
+        meal.save()
+
+        meal_item_id = self.kwargs['pk']
+        meal_item = MealItem.objects.get(pk=meal_item_id)
+        form.instance.was_planned = meal_item.check_meal_choice()
+        was_planned = form.instance.was_planned
+        meal_item.was_planned = was_planned
+        meal_item.save()
+
+        return super(MealItemEditView, self).form_valid(form)

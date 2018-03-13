@@ -34,14 +34,12 @@ from django.utils.translation import ugettext_lazy
 from django.views.generic import (ListView, DeleteView, CreateView, UpdateView)
 
 from wger.manager.models import WorkoutLog
-from wger.core.models import Language
 from wger.exercises.models import (Exercise, Muscle, ExerciseCategory)
 from wger.utils.generic_views import (WgerFormMixin, WgerDeleteMixin)
-from wger.utils.language import load_language, load_item_languages
+from wger.utils.language import load_language
 from wger.utils.cache import cache_mapper
 from wger.utils.widgets import (TranslatedSelect, TranslatedSelectMultiple,
                                 TranslatedOriginalSelectMultiple)
-from wger.config.models import LanguageConfig
 from wger.weight.helpers import process_log_entries
 from wger.core.views.fitbit import FitBit
 from wger.core.models import Language

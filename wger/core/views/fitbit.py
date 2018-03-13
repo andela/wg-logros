@@ -33,7 +33,7 @@ class FitBit:
 
         # Authentication header
         client_id = self.CLIENT_ID.encode('utf-8')
-        secret = self.CLIENT_SECRET.encode('utf-8')
+        self.CLIENT_SECRET.encode('utf-8')
 
         headers = {
             'Authorization': 'Basic MjJDTVY5OjdhOWVlZGM3MjQ3ZWY4ZTRjNjRkODk2YWViOWEwNmY2',
@@ -69,8 +69,8 @@ class FitBit:
         """ Refresh expired access token """
 
         # authentication header
-        client_id = self.CLIENT_ID.encode('utf-8')
-        secret = self.CLIENT_SECRET.encode('utf-8')
+        self.CLIENT_ID.encode('utf-8')
+        self.CLIENT_SECRET.encode('utf-8')
         headers = {
             'Authorization': 'Basic MjJDTVY5OjdhOWVlZGM3MjQ3ZWY4ZTRjNjRkODk2YWViOWEwNmY2DQo=',
             'Content-Type': 'application/x-www-form-urlencoded'

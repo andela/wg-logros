@@ -92,10 +92,6 @@ def comparison(request, username=None):
     Analysis page
     '''
     users = list(User.objects.all())
-
-    ctx = {
-        "users": users,
-    }
     is_owner, user = check_access(request.user, username)
     others = User.objects.exclude(username=user.username)
 

@@ -20,12 +20,12 @@ DATABASES = {
         'PORT': '',
     }
 }
+if os.getenv('DATABASE_URL'):	
+    import dj_database_url	
+    DATABASES = {'default': dj_database_url.config()}	
+	
+SESSION_ENGINE= 'django.contrib.sessions.backends.cached_db'	
 
-if os.getenv('DATABASE_URL'):
-    import dj_database_url
-    DATABASES = {'default': dj_database_url.config()}
-
-SESSION_ENGINE= 'django.contrib.sessions.backends.cached_db'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'l5(yrvp-8og9zcq2#6$xktzx_!)r0-(ao1#vwk1v#k-05033%y'
@@ -39,7 +39,6 @@ NOCAPTCHA = True
 # This is needed for uploaded files and images (exercise images, etc.) to be
 # properly served.
 SITE_URL = os.getenv("SITE_ROOT")
-
 # Path to uploaded files
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT = '/Users/shakiraseruwagi/.local/share/wger/media'

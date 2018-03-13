@@ -19,7 +19,6 @@ import uuid
 import datetime
 import csv
 from io import TextIOWrapper
-from json import loads, dumps
 
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpResponse
@@ -29,7 +28,6 @@ from django.utils.translation import ugettext_lazy, ugettext as _
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DeleteView, UpdateView
-from django.utils.encoding import smart_str
 
 from wger.core.models import (RepetitionUnit, WeightUnit, DaysOfWeek)
 from wger.exercises.models import Exercise

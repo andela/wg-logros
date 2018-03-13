@@ -48,7 +48,7 @@ function wgerCustomModalInit()
     <thead>
             {% if is_owner %}
             <tr>
-                <td colspan="6">
+                <td colspan="8">
                 <a href="{% url 'nutrition:meal:add' plan.id %}"
                    class="wger-modal-dialog">
                     <span class="{% fa_class 'plus' %}"></span>
@@ -60,6 +60,7 @@ function wgerCustomModalInit()
         <tr style="background: #E0E0E0;">
             <th>{% trans "Meal" %}</th>
             <th>{% trans "Contents" %}</th>
+            <th>{% trans " Status" %}</th>
             <th class="align-right">{% trans "Energy" %}</th>
             <th class="align-right">{% trans "Protein" %}</th>
             <th class="align-right">{% trans "Carbohydrates" %}</th>
@@ -69,6 +70,7 @@ function wgerCustomModalInit()
     <tbody>
     <tr>
         <td colspan="2"></td>
+        <td class="align-right">   </td>
         <td class="align-right">{% trans 'kcal' %}</td>
         <td class="align-right">{% trans_weight_unit 'g' owner_user %}</td>
         <td class="align-right">{% trans_weight_unit 'g' owner_user %}</td>
@@ -81,18 +83,18 @@ function wgerCustomModalInit()
         <td rowspan="{{meal.mealitem_set.count}}">
             <strong>
             {% trans "Nr."%} {{ forloop.parentloop.counter }}
-            {% if meal.time %} &ndash; {{meal.time|time:"H:i"}}{% endif %}
+            {% if meal.time %} &ndash; {{meal.time|time:"H:i"}}
+            {% else %}
+            {{meal.time|time:"H:i"}}
+            {% endif %}
             </strong>
 
             {% if is_owner %}
             <div class="editoptions">
                 <a href="{% url 'nutrition:meal:delete' meal.id %}"
-                   title="{% trans 'Delete' %}">
-                   <span class="{% fa_class 'trash' %}"></span></a>
-                <a href="{% url 'nutrition:meal:edit' meal.id %}"
-                   title="{% trans 'Edit' %}"
-                   class="wger-modal-dialog">
-                    <span class="{% fa_class 'pencil-square-o' %}"></span></a>
+                   title="{% trans 'Delete Meal Plan' %}">
+                <span class="{% fa_class 'trash' %}"></span></a>
+            
                 <a href="{% url 'nutrition:meal_item:add' meal.id %}"
                    title="{% trans 'Add' %}"
                    class="wger-modal-dialog edit-meal">
@@ -111,16 +113,31 @@ function wgerCustomModalInit()
             {% if is_owner %}
             <span class="editoptions">
                 <a href="{% url 'nutrition:meal_item:delete' item.id %}"
-                   title="{% trans 'Delete' %}"
+                   title="{% trans 'Delete Meal Item' %}"
                    class="delete-mealitem">
                    <span class="{% fa_class 'trash' %}"></span></a>
-                <a href="{% url 'nutrition:meal_item:edit' item.id %}"
+                <a href="{% url 'nutrition:meal_item:edit' item.id%}"
                    title="{% trans 'Edit' %}"
                    class="wger-modal-dialog edit-meal edit-mealitem">
                     <span class="{% fa_class 'pencil-square-o' %}"></span></a>
             </span>
             {% endif %}
             </td>
+            
+            {% if item.meal_choice == "Planned" %}
+            <td class="align-right">{% trans "Planned" %}</td>
+           
+            {% elif item.meal_choice == "Consumed" %}
+            <td class="align-right">{% trans "Consumed" %}
+                {% if item.was_planned == True %}
+                <span class="label label-success">
+                    <em>{% trans "Planned" %}</em>
+                </span>
+                {% endif %}
+            </td>
+
+            {% endif %}
+            
             <td class="align-right">{{item.get_nutritional_values.energy|floatformat}}</td>
             <td class="align-right">{{item.get_nutritional_values.protein|floatformat}}</td>
             <td class="align-right">{{item.get_nutritional_values.carbohydrates|floatformat}}</td>
