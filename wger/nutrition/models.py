@@ -561,17 +561,27 @@ class Meal(models.Model):
     '''
 
     # Metaclass to set some other properties
+
     class Meta:
         ordering = [
             "time",
         ]
+    Planned = "Planned"
+    Consumed = "Consumed"
+    MEALCHOICE = (
+        (Planned, 'Planned'),
+        (Consumed, 'Consumed'),
+    )
+    meal_choice = models.CharField(max_length=10,
+                                   choices=MEALCHOICE,
+                                   default=Planned)
 
+    time = Html5TimeField(
+        null=True, blank=True, verbose_name=_('Time (approx)'))
     plan = models.ForeignKey(
         NutritionPlan, verbose_name=_('Nutrition plan'), editable=False)
     order = models.IntegerField(
         verbose_name=_('Order'), blank=True, editable=False)
-    time = Html5TimeField(
-        null=True, blank=True, verbose_name=_('Time (approx)'))
 
     def __str__(self):
         '''
@@ -622,7 +632,23 @@ class MealItem(models.Model):
     '''
     An item (component) of a meal
     '''
+    ordering = [
+        "time",
+    ]
+    Planned = "Planned"
+    Consumed = "Consumed"
+    MEALCHOICE = (
+        (Planned, 'Planned'),
+        (Consumed, 'Consumed'),
+    )
+    meal_choice = models.CharField(max_length=10,
+                                   choices=MEALCHOICE,
+                                   default=Planned)
 
+    was_planned = models.BooleanField(default=False)
+
+    time = Html5TimeField(
+        null=True, blank=True, verbose_name=_('Time (approx)'))
     meal = models.ForeignKey(
         Meal, verbose_name=_('Nutrition plan'), editable=False)
     ingredient = models.ForeignKey(Ingredient, verbose_name=_('Ingredient'))
@@ -731,6 +757,11 @@ class MealItem(models.Model):
                 nutritional_info[i]).quantize(TWOPLACES)
 
         return nutritional_info
+
+    def check_meal_choice(self):
+        if self.meal_choice == self.Planned:
+            return True
+        return False
 
 
 @receiver(post_save, sender=NutritionPlan)

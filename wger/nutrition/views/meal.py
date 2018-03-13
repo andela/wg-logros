@@ -54,12 +54,12 @@ class MealCreateView(WgerFormMixin, CreateView):
 
     def get_success_url(self):
         data = self.request.POST
-
         ingredient = Ingredient.objects.get(id=data.get('ingredient'))
         meal_item = MealItem.objects.create(
             meal=self.object,
             amount=data.get('amount'),
             ingredient=ingredient,
+            meal_choice=data.get('meal_choice'),
             order=1,
         )
         if 'weight_unit' in data:

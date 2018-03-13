@@ -1,7 +1,5 @@
 from django.core.urlresolvers import reverse
 
-from wger.core.tests.base_testcase import WorkoutManagerTestCase
-
 
 def comparison(self):
     '''

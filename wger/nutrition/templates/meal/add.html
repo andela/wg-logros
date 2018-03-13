@@ -21,6 +21,7 @@
     {% csrf_token %}
     {% render_form_errors form %}
     {{ form.ingredient }}
+    {% render_form_field form.meal_choice %}
     {% render_form_field form.time %}
     <div class="form-group {% if field.errors %}has-error{% endif %}"
          id="form-id_ingredient_searchfield">
