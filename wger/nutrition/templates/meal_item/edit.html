@@ -3,8 +3,13 @@
 {% load staticfiles %}
 {% load wger_extras %}
 
-
-{% block title %}{% trans "Edit meal item" %}{% endblock %}
+{% block title %}
+{% if not is_create %}
+{% trans "Edit meal item" %}
+{% else %}
+{% trans "Add meal item" %}
+{% endif %}
+{% endblock %}
 
 
 {% block header %}
