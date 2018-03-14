@@ -191,9 +191,7 @@
     <div class="col-md-3">
         <div class="panel panel-default">
             <div class="panel-heading">
-                    {% if active_workout == step %}
-                        <span class="label label-info active-step pull-right">{% trans "active" %}</span>
-                    {% endif  %}
+                    
                 <h4 class="panel-title">
                     {% if step.is_periodized %}
                   <label class="label label-success">{{ step.duration|periodize }}</label>
