@@ -50,7 +50,7 @@ Jinja2==2.10
 MarkupSafe==1.0
 pep8==1.7.1
 psycopg2==2.7.4
-Pygments==2.2.0
+Pygments==2.7.4
 python-dateutil==2.6.1
 pytz==2018.3
 rcssmin==1.0.6
