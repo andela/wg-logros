@@ -40,7 +40,7 @@ chardet==3.0.4
 coverage==4.5.1
 dj-database-url==0.4.2
 django-appconf==1.0.2
-django-debug-toolbar==1.9.1
+django-debug-toolbar==1.11.1
 docutils==0.14
 gunicorn==19.7.1
 html5lib==1.0.1
