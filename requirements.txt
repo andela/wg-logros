@@ -58,7 +58,7 @@ rjsmin==1.0.12
 snowballstemmer==1.2.1
 sphinxcontrib-websupport==1.0.1
 sqlparse==0.2.4
-urllib3==1.22
+urllib3==1.26.5
 webencodings==0.5.1
 whitenoise==3.3.1
 django-extensions
